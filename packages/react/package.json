@@ -1,6 +1,6 @@
 {
   "name": "@actorize/react",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A React hook for @actorize/core",
   "keywords": [ "actor", "messaging", "system", "worker", "threads", "react"],
   "main": "dist/lib/index.js",
