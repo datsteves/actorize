@@ -1,0 +1,5 @@
+node_modules
+dist
+notes.md
+old-src
+.DS_Store

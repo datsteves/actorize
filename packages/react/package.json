@@ -1,0 +1,41 @@
+{
+  "name": "@actorize/react",
+  "version": "0.0.4",
+  "description": "A React hook for @actorize/core",
+  "keywords": [ "actor", "messaging", "system", "worker", "threads", "react"],
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc --outDir dist/lib --declarationDir dist/types --declaration true",
+    "prepare": "npm-install-peers",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steffen Meyer <steffen@datsteves.me>",
+  "license": "MIT",
+  "bugs": "https://github.com/datsteves/actorize/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/datsteves/actorize.git",
+    "directory": "packages/core"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.1.0",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@types/jest": "^26.0.20",
+    "@types/react": "^17.0.0",
+    "jest": "^26.6.3",
+    "npm-install-peers": "^1.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.36.2",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.3"
+  },
+  "peerDependencies": {
+    "react": "17.0.1"
+  }
+}
