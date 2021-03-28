@@ -110,6 +110,9 @@ workerInterface.handleLocalIncomingMessages((msg) => {
   myWorker.postMessage(msg);
 });
 
+// or to make it easier you can use
+// const workerInterface = createWorkerInterface(myWorker)
+
 const router = createRouter({
   ownDomain: 'ui',
   domains: {
@@ -133,16 +136,8 @@ import {
   createRouter,
 } from '@actorize/core';
 
-const ni = createNetworkInterface();
-
-// @ts-expect-error custom
-self.onmessage = (arg) => {
-  ni.sendLocal(arg.data);
-};
-ni.handleLocalIncomingMessages((msg) => {
-  // @ts-expect-error custom
-  self.postMessage(msg);
-});
+// as self is in this instance a worker object/instance.
+const ni = createWorkerInterface(self)
 
 
 const router = createRouter({
@@ -170,11 +165,9 @@ actor.onMessage((msgs) => {
 to use some autocomplete when choosing the actors name you can do this
 ```typescript
 declare module '@actorize/core/dist/types/actor/store' {
-  // this interface is just being used with a "keyof" to be able to merge these
-  // into the autocomplete system :) so the type is actually irrelevant. maybe we can use it later for specifing the payload?
   interface RecipientAsI {
-    'ui.navigation-router': any;
-    'ui.command-palette': any;
+    'ui.navigation-router': { actionType: 'PUSH' | 'REPLACE', path: string };
+    'ui.command-palette': { action: 'OPEN' | 'CLOSE' };
   }
 }
 ```
