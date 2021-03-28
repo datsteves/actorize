@@ -3,7 +3,8 @@ export interface RecipientAsI { }
 export type LiteralUnion<T extends U, U = string> = T | (U & {});
 export type Recipient = LiteralUnion<keyof RecipientAsI>
 
-export type PossibleMessagePayload = string | number | Record<string, any> | (string | number | Record<string, any>)[]
+export type PossibleMessagePayload = RecipientAsI[keyof RecipientAsI] extends never ? any : RecipientAsI[keyof RecipientAsI]
+
 
 export interface Message {
   recipient: Recipient;

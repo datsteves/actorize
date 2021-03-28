@@ -2,8 +2,12 @@ import { createDirector, createStore, dispatch } from './src'
 
 declare module './src/actor/store' {
   interface RecipientAsI {
-    test: any;
-    test23: any;
+    test: {
+      test: 'test',
+    };
+    test23: {
+      test: 'hello',
+    };
   }
 }
 
@@ -13,4 +17,4 @@ const d = createDirector({
 
 const a = d.registerActor('test234')
 
-dispatch(d, 'test', 'test')
+dispatch(d, 'test', {})
