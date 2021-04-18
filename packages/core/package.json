@@ -1,6 +1,6 @@
 {
   "name": "@actorize/core",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Actorize helps building scalable js apps with a messaging system",
   "keywords": [
     "actor",
