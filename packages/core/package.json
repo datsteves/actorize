@@ -16,7 +16,7 @@
   ],
   "private": false,
   "scripts": {
-    "build": "rimraf dist && tsc --outDir dist/lib --declarationDir dist/types --declaration true",
+    "build": "rimraf dist && tsc --project tsconfig.npm.json --outDir dist/lib --declarationDir dist/types --declaration true",
     "test": "jest"
   },
   "author": "Steffen Meyer <steffen@datsteves.me>",
