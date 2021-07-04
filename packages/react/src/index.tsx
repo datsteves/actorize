@@ -1,5 +1,5 @@
 import React from 'react'
-import { Director, Message } from '@actorize/core'
+import { Director, Message, createRemoteStorageConsumer } from '@actorize/core'
 
 interface ActorizeProviderProps {
   director: Director;
@@ -21,19 +21,54 @@ interface UseActorizeOptions {
 }
 
 export const useActorize = (name: string, options?: UseActorizeOptions) => {
-  const { director } = React.useContext(Context)
-  const [actor] = React.useState(director.registerActor(name))
-  if (options) {
-    if (options.onMessage) {
+  const { onMessage } = options || {};
+  const { director } = React.useContext(Context);
+  const [actor] = React.useState(director.registerActor(name));
+  React.useEffect(() => {
+    if (onMessage) {
       actor.onMessage((msgs: Message[]) => {
-        if (!options.onMessage) {
-          return
+        if (!onMessage) {
+          return;
         }
         for (let i = 0; i < msgs.length; i += 1) {
-          options.onMessage(msgs[i])
+          onMessage(msgs[i]);
         }
-      })
+      });
     }
-  }
-  return actor
+  }, [actor, onMessage]);
+
+  return actor;
+};
+
+
+export const useRemoteStorage = (storeLocation: string) => {
+  const { director } = React.useContext(Context)
+  const [store] = React.useState(createRemoteStorageConsumer(director, {
+    storeLocation
+  }))
+  return store
+}
+
+interface UseRemoteStorageFieldOptions {
+  useOptimisticReponse?: boolean;
+}
+
+export const useRemoteStorageField = (storeLocation: string, fieldKey: string, options?: UseRemoteStorageFieldOptions) => {
+  const { useOptimisticReponse } = options || {}
+  const store = useRemoteStorage(storeLocation)
+  const [value, setValue] = React.useState(undefined)
+  React.useEffect(() => {
+    store.onUpdate([fieldKey], (key: string, val: any) => {
+      setValue(val)
+    })
+    store.get(fieldKey).then((val: any) => setValue(val))
+  }, [store, setValue])
+  const remoteSetValue = React.useCallback(async (val: any) => {
+    await store.set(fieldKey, val);
+    if (useOptimisticReponse) {
+      setValue(val)
+    }
+
+  }, [setValue, useOptimisticReponse, store])
+  return [value, remoteSetValue]
 }

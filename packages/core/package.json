@@ -1,6 +1,6 @@
 {
   "name": "@actorize/core",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Actorize helps building scalable js apps with a messaging system",
   "keywords": [
     "actor",
@@ -28,15 +28,15 @@
     "directory": "packages/core"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-typescript": "^8.2.1",
     "@types/jest": "^26.0.23",
-    "jest": "^26.6.3",
+    "jest": "^27.0.6",
     "rimraf": "^3.0.2",
-    "rollup": "^2.50.4",
-    "ts-jest": "^26.5.6",
-    "ts-node": "^9.1.1",
-    "tslib": "^2.2.0",
-    "typescript": "^4.3.2"
+    "rollup": "^2.52.7",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
   }
 }

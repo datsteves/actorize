@@ -46,19 +46,14 @@ export function createStore() {
   }
 
   const subscribe = (recipient: Recipient, callback: (msg: Message[]) => void) => {
-    let timeout = -1
     const cb = async () => {
       const msgs = await popMessages(recipient)
       if (msgs.length) {
         callback(msgs)
       }
-
-      // timeout = setTimeout(cb, 50)
     }
     callbacks[recipient] = cb
-    // timeout = setTimeout(cb, 50)
     return () => {
-      // self.clearTimeout(timeout)
       delete callbacks[recipient]
     }
   }

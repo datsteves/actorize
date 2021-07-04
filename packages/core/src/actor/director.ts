@@ -24,7 +24,8 @@ function patchStoreWithPlugins(store: WatchableMessageStore, routers: NetworkRou
           sender,
         },
       }
-      const found = routers.find(router => {
+      // just match the first one that returns true
+      routers.find(router => {
         const success = router.handleIncomingMessage(networkmsg, store)
         return success
       })
