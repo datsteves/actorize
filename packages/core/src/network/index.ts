@@ -1,5 +1,8 @@
-import { NetworkInterface, NetworkMessage, NetworkRouter, createNetworkInterface, createRouter } from './network'
-import { createLocalInterface } from './localInterface'
+import {
+  NetworkInterface, NetworkMessage, NetworkRouter, createNetworkInterface, createRouter,
+} from './network';
+// eslint-disable-next-line import/no-cycle
+import { createLocalInterface } from './localInterface';
 
 export {
   NetworkInterface,
@@ -8,4 +11,4 @@ export {
   createNetworkInterface,
   createRouter,
   createLocalInterface,
-}
+};

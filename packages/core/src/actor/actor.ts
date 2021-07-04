@@ -1,4 +1,6 @@
-import { Message, PossibleMessagePayload, WatchableMessageStore, Recipient } from './store'
+import {
+  Message, PossibleMessagePayload, WatchableMessageStore, Recipient,
+} from './store';
 
 export interface Actor {
   onMessage: (cb: (msgs: Message[]) => void) => () => void
@@ -12,22 +14,23 @@ interface CreateActorDependecies {
 
 function createActor(deps: CreateActorDependecies, name: Recipient): Actor {
   const onMessage = (cb: (msgs: Message[]) => void) => {
-    const unsub = deps.store.subscribe(name, cb)
-    return unsub
-  }
-  const sendMessage = async (recipient: Recipient, payload: PossibleMessagePayload) => {
-    return deps.store.pushMessage(recipient, payload, name)
-  }
-  const sendMessageToSelf = async (payload: PossibleMessagePayload) => {
-    return deps.store.pushMessage(name, payload, name)
-  }
+    const unsub = deps.store.subscribe(name, cb);
+    return unsub;
+  };
+  const sendMessage = async (
+    recipient: Recipient,
+    payload: PossibleMessagePayload,
+  ) => deps.store.pushMessage(recipient, payload, name);
+  const sendMessageToSelf = async (
+    payload: PossibleMessagePayload,
+  ) => deps.store.pushMessage(name, payload, name);
   return {
     onMessage,
     sendMessage,
     sendMessageToSelf,
-  }
+  };
 }
 
 export function createActorFactory(deps: CreateActorDependecies): (name: Recipient) => Actor {
-  return createActor.bind(null, deps)
+  return createActor.bind(null, deps);
 }

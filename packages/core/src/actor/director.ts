@@ -1,6 +1,7 @@
-import { Actor, createActorFactory } from './actor'
-import { WatchableMessageStore, PossibleMessagePayload, Recipient } from './store'
-import { NetworkMessage, NetworkRouter } from '../network'
+import { Actor, createActorFactory } from './actor';
+import { WatchableMessageStore, PossibleMessagePayload, Recipient } from './store';
+// eslint-disable-next-line import/no-cycle
+import { NetworkMessage, NetworkRouter } from '../network';
 
 export interface Director {
   registerActor: (name: Recipient) => Actor
@@ -11,9 +12,16 @@ interface CreateDirectorOptions {
   routers?: NetworkRouter[]
 }
 
-function patchStoreWithPlugins(store: WatchableMessageStore, routers: NetworkRouter[]): WatchableMessageStore {
-  const pushMessage = async (recipient: Recipient, payload: PossibleMessagePayload, sender: string) => {
-    const recipientParts = recipient.split('.')
+function patchStoreWithPlugins(
+  store: WatchableMessageStore,
+  routers: NetworkRouter[],
+): WatchableMessageStore {
+  const pushMessage = async (
+    recipient: Recipient,
+    payload: PossibleMessagePayload,
+    sender: string,
+  ) => {
+    const recipientParts = recipient.split('.');
     const isLocal = recipientParts.length === 1;
     if (!isLocal) {
       const networkmsg: NetworkMessage = {
@@ -23,40 +31,40 @@ function patchStoreWithPlugins(store: WatchableMessageStore, routers: NetworkRou
           payload,
           sender,
         },
-      }
+      };
       // just match the first one that returns true
-      routers.find(router => {
-        const success = router.handleIncomingMessage(networkmsg, store)
-        return success
-      })
-      return
+      routers.find((router) => {
+        const success = router.handleIncomingMessage(networkmsg, store);
+        return success;
+      });
+      return undefined;
     }
-    return store.pushMessage(recipient, payload, sender)
-  }
+    return store.pushMessage(recipient, payload, sender);
+  };
   return {
     ...store,
     pushMessage,
-  }
+  };
 }
 
 export function createDirector(options: CreateDirectorOptions): Director {
-  const { store, routers = [] } = options
-  const patchedStore = patchStoreWithPlugins(store, routers)
-  routers.forEach(router => {
-    router.interfaces.forEach(i => {
+  const { store, routers = [] } = options;
+  const patchedStore = patchStoreWithPlugins(store, routers);
+  routers.forEach((router) => {
+    router.interfaces.forEach((i) => {
       i.setLocalCallback((msg: NetworkMessage) => {
-        const rx = msg.domain ? `${msg.domain}.${msg.payload.recipient}` : msg.payload.recipient
-        patchedStore.pushMessage(rx, msg.payload.payload, msg.payload.sender)
-      })
-    })
-  })
-  const createActor = createActorFactory({ store: patchedStore })
+        const rx = msg.domain ? `${msg.domain}.${msg.payload.recipient}` : msg.payload.recipient;
+        patchedStore.pushMessage(rx, msg.payload.payload, msg.payload.sender);
+      });
+    });
+  });
+  const createActor = createActorFactory({ store: patchedStore });
 
   const registerActor = (name: Recipient): Actor => {
-    const actor = createActor(name)
-    return actor
-  }
+    const actor = createActor(name);
+    return actor;
+  };
   return {
-    registerActor
-  }
+    registerActor,
+  };
 }
