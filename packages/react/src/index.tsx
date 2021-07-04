@@ -53,33 +53,33 @@ interface UseRemoteStorageFieldOptions {
   useOptimisticReponse?: boolean;
 }
 
-export const useRemoteStorageField = (
+export function useRemoteStorageField <T = unknown>(
   storeLocation: string,
   fieldKey: string,
   options?: UseRemoteStorageFieldOptions,
-) => {
+) {
   const {
     useOptimisticReponse = false,
   } = options || {};
 
   const store = useRemoteStorage(storeLocation);
-  const [value, setValue] = React.useState<unknown>(undefined);
+  const [value, setValue] = React.useState<T>();
 
   React.useEffect(() => {
     // subsribe to updates so we can update
-    store.onUpdate([fieldKey], (key: string, val: unknown) => {
+    store.onUpdate([fieldKey], (key: string, val: T) => {
       setValue(val);
     });
     // get the inital state and then just set it
     store.get(fieldKey)
-      .then((val: unknown) => setValue(val))
+      .then((val: T) => setValue(val))
       .catch(() => {
         // TODO: if in debug mode do console log out this error
         // just ignore it for now
       });
   }, [store, setValue, fieldKey]);
 
-  const remoteSetValue = React.useCallback(async (val: unknown) => {
+  const remoteSetValue = React.useCallback(async (val: T) => {
     await store.set(fieldKey, val);
     if (useOptimisticReponse) {
       setValue(val);
