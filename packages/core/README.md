@@ -1,4 +1,5 @@
 # @actorize/core
+[![gzip size](https://badgen.net/bundlephobia/minzip/@actorize/core)]()
 
 ## Getting Started
 

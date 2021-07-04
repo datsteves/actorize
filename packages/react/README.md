@@ -1,4 +1,5 @@
 # @actorize/react
+[![gzip size](https://badgen.net/bundlephobia/minzip/@actorize/react)]()
 
 > this is just the React Extension for [@actorize/core](https://www.npmjs.com/package/@actorize/core)
 
