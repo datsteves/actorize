@@ -2,8 +2,8 @@
 import { Director, dispatch, Message } from '../index';
 import { randomstring } from '../utils';
 
-const createDefaultStorage = () => {
-  const data: Record<string, unknown> = {};
+const createDefaultStorage = (defaultValue: Record<string, unknown> = {}) => {
+  const data: Record<string, unknown> = defaultValue;
   return {
     set: async (key: string, value: unknown) => {
       data[key] = value;
@@ -24,10 +24,12 @@ export interface RemoteStorageInterface {
 interface CreateStoreProviderOptions {
   actorName: string;
   storage?: RemoteStorageInterface;
+  defaultValue?: Record<string, unknown>;
 }
 
 export function createRemoteStorageProvider(director: Director, opts: CreateStoreProviderOptions) {
-  const { actorName, storage = createDefaultStorage() } = opts;
+  const { actorName, defaultValue } = opts;
+  const { storage = createDefaultStorage(defaultValue) } = opts
   const actor = director.registerActor(actorName);
   const keysSubscribed: Record<string, string[]> = {};
   const localStore = {

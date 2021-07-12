@@ -22,6 +22,7 @@ import {
   createRemoteStorageConsumer,
   createRemoteStorageProvider,
 } from './remote-store';
+import { createLogPlugin } from './plugins'
 
 export {
   createDirector,
@@ -41,4 +42,5 @@ export {
   RemoteStorageInterface,
   createRemoteStorageConsumer,
   createRemoteStorageProvider,
+  createLogPlugin,
 };

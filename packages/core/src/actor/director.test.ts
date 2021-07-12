@@ -1,5 +1,5 @@
 import { createStore } from './store';
-import { createDirector } from './director';
+import { ActorizePlugin, createDirector } from './director';
 
 describe('director', () => {
   it('basic registerActor and sendMessage', async () => {
@@ -31,5 +31,26 @@ describe('director', () => {
     await actor2.sendMessage('otherthread.actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(mockfn).toBeCalledTimes(0);
+  });
+
+  it('plugin system works', async () => {
+    const store = createStore();
+    const mockfnPlugin = jest.fn();
+    const plugin: ActorizePlugin = {
+      onMessage: (msg) => {
+        mockfnPlugin(msg)
+        return msg
+      }
+    }
+    const director = createDirector({
+      store,
+      plugins: [plugin],
+    });
+    const actor1 = director.registerActor('actor-1');
+    const actor2 = director.registerActor('actor-2');
+    await actor2.sendMessage('actor-1', 'hello');
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(mockfnPlugin).toBeCalledTimes(1);
+    expect(mockfnPlugin).toBeCalledWith({ recipient: 'actor-1', payload: 'hello', sender: 'actor-2' });
   });
 });
