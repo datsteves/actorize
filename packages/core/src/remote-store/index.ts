@@ -29,7 +29,7 @@ interface CreateStoreProviderOptions {
 
 export function createRemoteStorageProvider(director: Director, opts: CreateStoreProviderOptions) {
   const { actorName, defaultValue } = opts;
-  const { storage = createDefaultStorage(defaultValue) } = opts
+  const { storage = createDefaultStorage(defaultValue) } = opts;
   const actor = director.registerActor(actorName);
   const keysSubscribed: Record<string, string[]> = {};
   const localStore = {

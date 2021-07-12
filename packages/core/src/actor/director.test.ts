@@ -38,10 +38,10 @@ describe('director', () => {
     const mockfnPlugin = jest.fn();
     const plugin: ActorizePlugin = {
       onMessage: (msg) => {
-        mockfnPlugin(msg)
-        return msg
-      }
-    }
+        mockfnPlugin(msg);
+        return msg;
+      },
+    };
     const director = createDirector({
       store,
       plugins: [plugin],

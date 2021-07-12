@@ -1,3 +1,5 @@
-import createLogPlugin from "./log";
+// eslint-disable-next-line import/no-cycle
+import createLogPlugin from './log';
 
-export { createLogPlugin }
+export { createLogPlugin };
+export default {};

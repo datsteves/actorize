@@ -1,5 +1,7 @@
 import { Actor, createActorFactory } from './actor';
-import { WatchableMessageStore, PossibleMessagePayload, Recipient, Message } from './store';
+import {
+  WatchableMessageStore, PossibleMessagePayload, Recipient, Message,
+} from './store';
 // eslint-disable-next-line import/no-cycle
 import { NetworkMessage, NetworkRouter } from '../network';
 
@@ -17,14 +19,14 @@ interface CreateDirectorOptions {
 }
 
 function handleMessagePlugin(plugins: ActorizePlugin[], msg: Message): Message {
-  let tmpMessage = msg
+  let tmpMessage = msg;
   for (let i = 0; i < plugins.length; i += 1) {
-    const plugin = plugins[0]
+    const plugin = plugins[0];
     if (plugin.onMessage) {
-      tmpMessage = plugin.onMessage(tmpMessage)
+      tmpMessage = plugin.onMessage(tmpMessage);
     }
   }
-  return tmpMessage
+  return tmpMessage;
 }
 
 function patchStoreWithPlugins(
@@ -41,7 +43,7 @@ function patchStoreWithPlugins(
       payload,
       recipient,
       sender,
-    })
+    });
     const recipientParts = msg.recipient.split('.');
     const isLocal = recipientParts.length === 1;
     if (!isLocal) {

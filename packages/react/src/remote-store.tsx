@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRemoteStorageConsumer } from '@actorize/core';
-import { Context } from './core'
-
+import { Context } from './core';
 
 export const useRemoteStorage = (storeLocation: string) => {
   const { director } = React.useContext(Context);
@@ -48,4 +47,4 @@ export function useRemoteStorageField <T = unknown>(
     }
   }, [setValue, useOptimisticReponse, store, fieldKey]);
   return [value, remoteSetValue];
-};
+}
