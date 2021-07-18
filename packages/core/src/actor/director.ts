@@ -21,7 +21,7 @@ interface CreateDirectorOptions {
 function handleMessagePlugin(plugins: ActorizePlugin[], msg: Message): Message {
   let tmpMessage = msg;
   for (let i = 0; i < plugins.length; i += 1) {
-    const plugin = plugins[0];
+    const plugin = plugins[i];
     if (plugin.onMessage) {
       tmpMessage = plugin.onMessage(tmpMessage);
     }
