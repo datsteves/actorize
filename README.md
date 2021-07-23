@@ -1,4 +1,5 @@
-# Actorize
+![Logo Blue](https://raw.githubusercontent.com/datsteves/actorize/main/images/Logo%20Blue.svg)
+
 Is a package that helps you to split up components into multile actors, that can talk to each other, without knowing where those actors are. can be useful for:
 - send files into a webworker to upload it there and get events how far it is
 - long running tasks and their state changes over time that needs to be reflected in the ui
