@@ -1,4 +1,4 @@
-import { createRemoteStorageConsumer, createRemoteStorageProvider } from './index';
+import { createRemoteStorageConsumer, createRemoteStorageProvider } from '.';
 import {
   createDirector,
   createStore,
@@ -16,7 +16,7 @@ describe('Remote Storage', () => {
       actorName: 'test-storage',
     });
 
-    const cons = createRemoteStorageConsumer(director, {
+    const cons = createRemoteStorageConsumer<{ key1: string, key2: number }>(director, {
       storeLocation: 'test-storage',
     });
     const cb = jest.fn();

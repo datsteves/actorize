@@ -7,11 +7,14 @@ describe('director', () => {
     const director = createDirector({
       store,
     });
+    // @ts-expect-error for now ok
     const actor1 = director.registerActor('actor-1');
+    // @ts-expect-error for now ok
     const actor2 = director.registerActor('actor-2');
     const mockfn = jest.fn();
     actor1.onMessage(mockfn);
     expect(mockfn).toBeCalledTimes(0);
+    // @ts-expect-error for now ok
     await actor2.sendMessage('actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(mockfn).toBeCalledTimes(1);
@@ -23,11 +26,14 @@ describe('director', () => {
     const director = createDirector({
       store,
     });
+    // @ts-expect-error for now ok
     const actor1 = director.registerActor('actor-1');
+    // @ts-expect-error for now ok
     const actor2 = director.registerActor('actor-2');
     const mockfn = jest.fn();
     actor1.onMessage(mockfn);
     expect(mockfn).toBeCalledTimes(0);
+    // @ts-expect-error for now ok
     await actor2.sendMessage('otherthread.actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(mockfn).toBeCalledTimes(0);
@@ -46,8 +52,11 @@ describe('director', () => {
       store,
       plugins: [plugin],
     });
+    // @ts-expect-error for now ok
     const actor1 = director.registerActor('actor-1');
+    // @ts-expect-error for now ok
     const actor2 = director.registerActor('actor-2');
+    // @ts-expect-error for now ok
     await actor2.sendMessage('actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(mockfnPlugin).toBeCalledTimes(1);

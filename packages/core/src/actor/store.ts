@@ -1,12 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface RecipientAsI { }
+export interface RecipientAsI {}
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type LiteralUnion<T extends U, U = string> = T | (U & {});
 export type Recipient = LiteralUnion<keyof RecipientAsI>;
 
 export type PossibleMessagePayload
-  = RecipientAsI[keyof RecipientAsI] extends never ? unknown : RecipientAsI[keyof RecipientAsI];
+  = RecipientAsI extends never ? unknown : RecipientAsI;
 
 export interface Message<T = PossibleMessagePayload> {
   recipient: Recipient;
@@ -14,13 +14,12 @@ export interface Message<T = PossibleMessagePayload> {
   sender: string;
 }
 export interface WatchableMessageStore {
-  popMessages: (recipient: Recipient, keepMessage?: boolean) => Promise<Message[]>
-  pushMessage:
-  (recipient: Recipient, payload: PossibleMessagePayload, sender: string) => Promise<void>
-  subscribe: (recipient: Recipient, callback: (msg: Message[]) => void) => () => void
+  popMessages:  (recipient: Recipient, keepMessage?: boolean) => Promise<Message[]>
+  pushMessage: (recipient: Recipient, payload: any, sender: any) => Promise<void>
+  subscribe:(recipient: Recipient, callback: (msg: Message[]) => void) => () => void
 }
 
-export function createStore() {
+export function createStore(): WatchableMessageStore {
   let messages: Message[] = [];
   const callbacks: Record<string, () => void> = {};
 
@@ -34,8 +33,8 @@ export function createStore() {
 
   const pushMessage = async (
     recipient: Recipient,
-    payload: PossibleMessagePayload,
-    sender: string,
+    payload: any,
+    sender: any,
   ) => {
     messages.push({
       recipient,

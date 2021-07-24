@@ -6,10 +6,12 @@ describe('actor.ts', () => {
     const store = createStore();
     const createActor = createActorFactory({ store });
     const actorName = 'test';
+    // @ts-expect-error for now ok
     const actor = createActor(actorName);
     const mockfn = jest.fn();
     actor.onMessage(mockfn);
     expect(mockfn).toBeCalledTimes(0);
+    // @ts-expect-error for now ok
     actor.sendMessageToSelf('hello');
 
     await new Promise((resolve) => setTimeout(resolve, 10));

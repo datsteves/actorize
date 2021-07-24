@@ -5,16 +5,19 @@ declare module './src/actor/store' {
     test: {
       test: 'test',
     };
-    test23: {
-      test: 'hello',
+    'ui.test23': {
+      test2: 'hello',
     };
-  }
+    't': 'test';
+    // [key: string]: any;
 }
 
 const d = createDirector({
-  'store': createStore(),
+  store: createStore(),
 })
 
-const a = d.registerActor('test234')
+const a = d.registerActor('')
 
-dispatch(d, 'test', {})
+// a.sendMessage('')
+
+dispatch(d, 'ui.test23', { test2: 'hello' })

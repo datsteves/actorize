@@ -1,0 +1,22 @@
+{
+  "name": "actorize-monorepo",
+  "version": "0.0.17",
+  "description": "...",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd packages/core && yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datsteves/actorize.git"
+  },
+  "author": "Steffen Meyer <steffen@datsteves.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datsteves/actorize/issues"
+  },
+  "homepage": "https://github.com/datsteves/actorize#readme",
+  "dependencies": {
+    "@changesets/cli": "^2.16.0"
+  }
+}

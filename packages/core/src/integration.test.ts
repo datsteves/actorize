@@ -32,6 +32,7 @@ describe('integration.test.ts', () => {
       routers: [routerOne],
     });
 
+    // @ts-expect-error for now ok
     const actorOne = directorOne.registerActor('one');
     const mockfnOne = jest.fn();
     actorOne.onMessage(mockfnOne);
@@ -49,12 +50,14 @@ describe('integration.test.ts', () => {
       routers: [routerTwo],
     });
 
+    // @ts-expect-error for now ok
     const actorTwo = directorTwo.registerActor('two');
     const mockfnTwo = jest.fn();
     actorTwo.onMessage(mockfnTwo);
     expect(mockfnOne).toBeCalledTimes(0);
     expect(mockfnTwo).toBeCalledTimes(0);
 
+    // @ts-expect-error for now ok
     actorTwo.sendMessage('routerOne.one', 'hello');
     await skiploop(100);
 
@@ -62,6 +65,7 @@ describe('integration.test.ts', () => {
     expect(mockfnOne).toBeCalledWith([{ recipient: 'one', payload: 'hello', sender: 'routerTwo.two' }]);
     expect(mockfnTwo).toBeCalledTimes(0);
 
+    // @ts-expect-error for now ok
     actorOne.sendMessage('routerTwo.two', 'hello');
     await skiploop(100);
 
@@ -132,11 +136,14 @@ describe('integration.test.ts', () => {
       store: storeThree,
       routers: [routerThree],
     });
+    // @ts-expect-error for now ok
     const actorOne = directorOne.registerActor('one');
+    // @ts-expect-error for now ok
     const actorThree = directorThree.registerActor('three');
     const mockfnThree = jest.fn();
     actorThree.onMessage(mockfnThree);
     expect(mockfnThree).toBeCalledTimes(0);
+    // @ts-expect-error for now ok
     actorOne.sendMessage('routerThree.three', 'test');
     await skiploop(100);
     expect(mockfnThree).toBeCalledTimes(1);
