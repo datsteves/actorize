@@ -1,5 +1,5 @@
 import {
-  Message, PossibleMessagePayload, WatchableMessageStore, Recipient, RecipientAsI,
+  Message, WatchableMessageStore, RecipientAsI,
 } from './store';
 
 export interface Actor<K extends keyof RecipientAsI, T extends RecipientAsI> {
@@ -12,16 +12,19 @@ interface CreateActorDependecies {
   store: WatchableMessageStore
 }
 
-function createActor<K extends keyof RecipientAsI, T extends RecipientAsI>(deps: CreateActorDependecies, name: K): Actor<K, T> {
+function createActor<
+  K extends keyof RecipientAsI,
+  T extends RecipientAsI,
+>(deps: CreateActorDependecies, name: K): Actor<K, T> {
   const onMessage = (cb: (msgs: Message[]) => void) => {
     const unsub = deps.store.subscribe(name, cb);
     return unsub;
   };
   const sendMessage = async <S extends keyof RecipientAsI>(
-    recipient: S ,
+    recipient: S,
     payload: T[S],
   ) => deps.store.pushMessage(recipient, payload, name);
-  const sendMessageToSelf = async(
+  const sendMessageToSelf = async (
     payload: T[K],
   ) => deps.store.pushMessage(name, payload, name);
   return {
@@ -31,6 +34,8 @@ function createActor<K extends keyof RecipientAsI, T extends RecipientAsI>(deps:
   };
 }
 
-export function createActorFactory<K extends keyof RecipientAsI>(deps: CreateActorDependecies): (name: K) => Actor<K,RecipientAsI> {
+export function createActorFactory<
+  K extends keyof RecipientAsI,
+>(deps: CreateActorDependecies): (name: K) => Actor<K, RecipientAsI> {
   return createActor.bind(null, deps);
 }

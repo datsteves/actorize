@@ -1,9 +1,7 @@
 // eslint-disable-next-line import/no-cycle
-import { Director, dispatch, Message } from '../index';
-import { randomstring } from '../utils';
-import createDefaultStorage, { RemoteStorageInterface } from './defaultStorage'
-
-
+import { Director, Message } from '../index';
+// eslint-disable-next-line import/no-cycle
+import createDefaultStorage, { RemoteStorageInterface } from './defaultStorage';
 
 interface CreateStoreProviderOptions {
   actorName: string;
@@ -99,4 +97,4 @@ function createRemoteStorageProvider(director: Director, opts: CreateStoreProvid
   return localStore;
 }
 
-export default createRemoteStorageProvider
+export default createRemoteStorageProvider;

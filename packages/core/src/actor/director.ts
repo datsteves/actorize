@@ -1,6 +1,6 @@
 import { Actor, createActorFactory } from './actor';
 import {
-  WatchableMessageStore, PossibleMessagePayload, Recipient, Message, RecipientAsI
+  WatchableMessageStore, PossibleMessagePayload, Recipient, Message, RecipientAsI,
 } from './store';
 // eslint-disable-next-line import/no-cycle
 import { NetworkMessage, NetworkRouter } from '../network';
@@ -84,7 +84,7 @@ export function createDirector(options: CreateDirectorOptions): Director {
   const createActor = createActorFactory({ store: patchedStore });
 
   const registerActor = <K extends keyof RecipientAsI>(name: K): Actor<K, RecipientAsI> => {
-    const tmp = name as any as string
+    const tmp = name as any as string;
     const parts = tmp.split('.');
     const n = parts[parts.length - 1] as K;
     const actor = createActor(n);

@@ -6,7 +6,9 @@ interface CreateStoreConsumerOptions {
   storeLocation: string;
 }
 
-function createRemoteStorageConsumer<T extends Record<string, any>>(director: Director, opts: CreateStoreConsumerOptions) {
+function createRemoteStorageConsumer<
+  T extends Record<string, any>,
+>(director: Director, opts: CreateStoreConsumerOptions) {
   const { storeLocation } = opts;
   const actorName = randomstring();
   // @ts-expect-error for now ok
@@ -64,4 +66,4 @@ function createRemoteStorageConsumer<T extends Record<string, any>>(director: Di
   return obj;
 }
 
-export default createRemoteStorageConsumer
+export default createRemoteStorageConsumer;

@@ -14,7 +14,7 @@ export interface Message<T = PossibleMessagePayload> {
   sender: string;
 }
 export interface WatchableMessageStore {
-  popMessages:  (recipient: Recipient, keepMessage?: boolean) => Promise<Message[]>
+  popMessages: (recipient: Recipient, keepMessage?: boolean) => Promise<Message[]>
   pushMessage: (recipient: Recipient, payload: any, sender: any) => Promise<void>
   subscribe:(recipient: Recipient, callback: (msg: Message[]) => void) => () => void
 }
