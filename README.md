@@ -194,7 +194,7 @@ const director = createDirector({
 
 ```
 
-A plugin in general can be used to transform messages before they are saved to the store too. At the moment it just as options for `onMessage` which gets a `Message` and has to return a `Message`.
+A plugin in general can be used to transform messages before they are saved to the store too. At the moment it just has options for `onMessage` which gets a `Message` and has to return a `Message`.
 The Typescript interface for the Plugin is
 ```typescript
 interface ActorizePlugin {
