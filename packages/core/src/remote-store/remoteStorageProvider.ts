@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-cycle
 import { Director, Message } from '../index';
-// eslint-disable-next-line import/no-cycle
 import createDefaultStorage, { RemoteStorageInterface } from './defaultStorage';
 
 interface CreateStoreProviderOptions {

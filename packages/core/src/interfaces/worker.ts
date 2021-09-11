@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { createNetworkInterface } from '../index';
 
 export const createWorkerInterface = (worker: Worker) => {

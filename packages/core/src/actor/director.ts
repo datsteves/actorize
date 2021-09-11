@@ -2,7 +2,6 @@ import { Actor, createActorFactory } from './actor';
 import {
   WatchableMessageStore, PossibleMessagePayload, Recipient, Message, RecipientAsI,
 } from './store';
-// eslint-disable-next-line import/no-cycle
 import { NetworkMessage, NetworkRouter } from '../network';
 
 export interface Director {

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { NetworkInterface, createNetworkInterface } from '..';
 
 export const createLocalInterface = (ifc: NetworkInterface) => {

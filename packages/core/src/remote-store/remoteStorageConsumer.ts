@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { Director, dispatch, Message } from '../index';
 import { randomstring } from '../utils';
 

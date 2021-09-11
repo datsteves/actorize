@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-cycle
 import { Message } from '../actor';
-// eslint-disable-next-line import/no-cycle
 import { ActorizePlugin } from '../actor/director';
 
 interface CreateLogPluginOptions {

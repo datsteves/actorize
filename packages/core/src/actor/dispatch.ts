@@ -1,5 +1,4 @@
 import { Message, RecipientAsI } from './store';
-// eslint-disable-next-line import/no-cycle
 import { Director } from './director';
 import { randomstring } from '../utils';
 
