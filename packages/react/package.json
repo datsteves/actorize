@@ -1,6 +1,6 @@
 {
   "name": "@actorize/react",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "A React hook for @actorize/core",
   "keywords": [
     "actor",
@@ -52,7 +52,7 @@
     "typescript": "^4.4.3"
   },
   "peerDependencies": {
-    "@actorize/core": "^0.0.17",
+    "@actorize/core": "^1.0.0",
     "react": "^17.0.2"
   }
 }

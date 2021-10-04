@@ -163,7 +163,7 @@ actor.onMessage((msgs) => {
 ```
 
 ## Typescript
-to use some autocomplete when choosing the actors name you can do this
+if you are using typescript, currently you have to set types like this
 ```typescript
 declare module '@actorize/core/dist/types/actor/store' {
   interface RecipientAsI {
@@ -172,6 +172,15 @@ declare module '@actorize/core/dist/types/actor/store' {
   }
 }
 ```
+or when you just want to play around a little or do not care about type safty, just override it with
+```typescript
+declare module '@actorize/core/dist/types/actor/store' {
+  interface RecipientAsI {
+    [key: string]: any;
+  }
+}
+```
+then you do not have any autocomplete or checking, but it does not throw type errors either.
 
 
 ## Plugin System
