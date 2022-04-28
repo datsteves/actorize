@@ -2,7 +2,8 @@
     "compilerOptions": {
         "module": "commonjs",
         // Target latest version of ECMAScript.
-        "target": "ES2018",
+        "target": "ESNEXT",
+        "lib": ["dom", "esnext"],
         // Search under node_modules for non-relative imports.
         "moduleResolution": "node",
         // Enable strictest settings like strictNullChecks & noImplicitAny.
@@ -13,7 +14,7 @@
         "types": [
             "jest"
         ],
-        "jsx": "react",
+        "jsx": "react-jsx",
         "resolveJsonModule": true
     },
     "include": [

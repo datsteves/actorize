@@ -6,12 +6,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
     'plugin:promise/recommended',
-    // 'plugin:compat/recommended',
+    'plugin:compat/recommended',
     'plugin:react-hooks/recommended',
-    // "prettier",
+    'prettier',
   ],
+  plugins: ['import'],
   rules: {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
@@ -21,6 +23,9 @@ module.exports = {
     createDefaultProgram: true,
   },
   settings: {
+    'import/resolver': {
+      node: {},
+    },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },

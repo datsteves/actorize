@@ -1,13 +1,13 @@
-import React from "react";
-import { createRemoteStorageConsumer } from "@actorize/core";
-import { Context } from "./core";
+import React from 'react';
+import { createRemoteStorageConsumer } from '@actorize/core';
+import { Context } from './core';
 
 export const useRemoteStorage = (storeLocation: string) => {
   const { director } = React.useContext(Context);
   const [store] = React.useState(
     createRemoteStorageConsumer(director, {
-      storeLocation
-    })
+      storeLocation,
+    }),
   );
   return store;
 };
@@ -19,7 +19,7 @@ interface UseRemoteStorageFieldOptions {
 export function useRemoteStorageField<T = unknown>(
   storeLocation: string,
   fieldKey: string,
-  options?: UseRemoteStorageFieldOptions
+  options?: UseRemoteStorageFieldOptions,
 ) {
   const { useOptimisticReponse = false } = options || {};
 
@@ -48,7 +48,7 @@ export function useRemoteStorageField<T = unknown>(
         setValue(val);
       }
     },
-    [setValue, useOptimisticReponse, store, fieldKey]
+    [setValue, useOptimisticReponse, store, fieldKey],
   );
   return [value, remoteSetValue];
 }

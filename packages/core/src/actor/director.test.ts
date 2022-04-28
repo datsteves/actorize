@@ -53,7 +53,7 @@ describe('director', () => {
       plugins: [plugin],
     });
     // @ts-expect-error for now ok
-    const actor1 = director.registerActor('actor-1');
+    director.registerActor('actor-1');
     // @ts-expect-error for now ok
     const actor2 = director.registerActor('actor-2');
     // @ts-expect-error for now ok

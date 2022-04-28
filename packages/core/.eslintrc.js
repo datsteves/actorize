@@ -5,9 +5,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
     'plugin:promise/recommended',
-    // 'plugin:compat/recommended',
-    // "prettier",
+    'plugin:compat/recommended',
+    'prettier',
   ],
+  plugins: ['import'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -23,8 +24,15 @@ module.exports = {
     createDefaultProgram: true,
   },
   settings: {
+    'import/resolver': {
+      node: {},
+    },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
+    polyfills: [
+      // as we can expect that promises are there
+      'Promise',
+    ],
   },
 }
