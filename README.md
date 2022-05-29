@@ -172,7 +172,7 @@ declare module '@actorize/core/dist/types/actor/store' {
   }
 }
 ```
-or when you just want to play around a little or do not care about type safty, just override it with
+or when you just want to play around a little or do not care about type safety, just override it with
 ```typescript
 declare module '@actorize/core/dist/types/actor/store' {
   interface RecipientAsI {
