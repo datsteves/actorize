@@ -20,6 +20,7 @@ interface UseActorizeOptions {
 export const useActorize = (name: Recipient, options?: UseActorizeOptions) => {
   const { onMessage } = options || {};
   const { director } = React.useContext(Context);
+  // @ts-expect-error TODO: Fix later. shows never, but it isn't never
   const [actor] = React.useState(director.registerActor(name));
   React.useEffect(() => {
     if (onMessage) {

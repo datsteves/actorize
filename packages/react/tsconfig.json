@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         // Target latest version of ECMAScript.
-        "target": "ESNEXT",
+        "target": "ES2015",
         "lib": ["dom", "esnext"],
         // Search under node_modules for non-relative imports.
         "moduleResolution": "node",

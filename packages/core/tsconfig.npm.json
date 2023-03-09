@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         // Target latest version of ECMAScript.
-        "target": "esnext",
+        "target": "ES2015",
         // Search under node_modules for non-relative imports.
         "moduleResolution": "node",
         // Enable strictest settings like strictNullChecks & noImplicitAny.

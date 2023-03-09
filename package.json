@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/datsteves/actorize#readme",
   "dependencies": {
-    "@changesets/cli": "^2.22.0",
-    "prettier": "^2.6.2"
+    "@changesets/cli": "^2.26.0",
+    "prettier": "^2.8.4"
   }
 }
