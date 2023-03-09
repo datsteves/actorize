@@ -10,12 +10,14 @@ describe('actor.ts', () => {
     const actor = createActor(actorName);
     const mockfn = jest.fn();
     actor.onMessage(mockfn);
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     // @ts-expect-error for now ok
     actor.sendMessageToSelf('hello');
 
     await new Promise((resolve) => setTimeout(resolve, 10));
-    expect(mockfn).toBeCalledTimes(1);
-    expect(mockfn).toBeCalledWith([{ recipient: actorName, payload: 'hello', sender: actorName }]);
+    expect(mockfn).toHaveBeenCalledTimes(1);
+    expect(mockfn).toHaveBeenCalledWith([
+      { recipient: actorName, payload: 'hello', sender: actorName },
+    ]);
   });
 });

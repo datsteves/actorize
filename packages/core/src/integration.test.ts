@@ -1,6 +1,4 @@
-import {
-  createStore, createDirector, createNetworkInterface, createRouter,
-} from './index';
+import { createStore, createDirector, createNetworkInterface, createRouter } from './index';
 
 function skiploop(time = 0) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -54,23 +52,27 @@ describe('integration.test.ts', () => {
     const actorTwo = directorTwo.registerActor('two');
     const mockfnTwo = jest.fn();
     actorTwo.onMessage(mockfnTwo);
-    expect(mockfnOne).toBeCalledTimes(0);
-    expect(mockfnTwo).toBeCalledTimes(0);
+    expect(mockfnOne).toHaveBeenCalledTimes(0);
+    expect(mockfnTwo).toHaveBeenCalledTimes(0);
 
     // @ts-expect-error for now ok
     actorTwo.sendMessage('routerOne.one', 'hello');
     await skiploop(100);
 
-    expect(mockfnOne).toBeCalledTimes(1);
-    expect(mockfnOne).toBeCalledWith([{ recipient: 'one', payload: 'hello', sender: 'routerTwo.two' }]);
-    expect(mockfnTwo).toBeCalledTimes(0);
+    expect(mockfnOne).toHaveBeenCalledTimes(1);
+    expect(mockfnOne).toHaveBeenCalledWith([
+      { recipient: 'one', payload: 'hello', sender: 'routerTwo.two' },
+    ]);
+    expect(mockfnTwo).toHaveBeenCalledTimes(0);
 
     // @ts-expect-error for now ok
     actorOne.sendMessage('routerTwo.two', 'hello');
     await skiploop(100);
 
-    expect(mockfnTwo).toBeCalledTimes(1);
-    expect(mockfnTwo).toBeCalledWith([{ recipient: 'two', payload: 'hello', sender: 'routerOne.one' }]);
+    expect(mockfnTwo).toHaveBeenCalledTimes(1);
+    expect(mockfnTwo).toHaveBeenCalledWith([
+      { recipient: 'two', payload: 'hello', sender: 'routerOne.one' },
+    ]);
   });
 
   it('basic same thread use case with 3 directors', async () => {
@@ -142,10 +144,10 @@ describe('integration.test.ts', () => {
     const actorThree = directorThree.registerActor('three');
     const mockfnThree = jest.fn();
     actorThree.onMessage(mockfnThree);
-    expect(mockfnThree).toBeCalledTimes(0);
+    expect(mockfnThree).toHaveBeenCalledTimes(0);
     // @ts-expect-error for now ok
     actorOne.sendMessage('routerThree.three', 'test');
     await skiploop(100);
-    expect(mockfnThree).toBeCalledTimes(1);
+    expect(mockfnThree).toHaveBeenCalledTimes(1);
   });
 });

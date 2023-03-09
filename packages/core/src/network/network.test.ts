@@ -24,11 +24,11 @@ describe('network/index.ts', () => {
         recipient: 'test2',
       },
     };
-    expect(mockFn).toBeCalledTimes(0);
+    expect(mockFn).toHaveBeenCalledTimes(0);
     const success = router.handleIncomingMessage(msg, store);
     expect(success).toBe(true);
-    expect(mockFn).toBeCalledTimes(1);
-    expect(mockFn).toBeCalledWith({
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith({
       ...msg,
       payload: {
         ...msg.payload,
@@ -59,10 +59,10 @@ describe('network/index.ts', () => {
         recipient: '',
       },
     };
-    expect(mockFn).toBeCalledTimes(0);
+    expect(mockFn).toHaveBeenCalledTimes(0);
     const success = router.handleIncomingMessage(msg, store);
     expect(success).toBe(false);
-    expect(mockFn).toBeCalledTimes(0);
+    expect(mockFn).toHaveBeenCalledTimes(0);
   });
 
   it('local', async () => {
@@ -91,11 +91,11 @@ describe('network/index.ts', () => {
         recipient: 'test2',
       },
     };
-    expect(mockFn).toBeCalledTimes(0);
+    expect(mockFn).toHaveBeenCalledTimes(0);
     const success = router.handleIncomingMessage(msg, store);
     expect(success).toBe(true);
-    expect(mockFn).toBeCalledTimes(1);
-    expect(mockFn).toBeCalledWith({
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith({
       ...msg,
       payload: {
         ...msg.payload,

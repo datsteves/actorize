@@ -6,7 +6,7 @@ describe('plugins:log', () => {
     const plugin = createLogPlugin({
       logger: mockfn,
     });
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     if (plugin.onMessage) {
       plugin.onMessage({
         payload: 'hello world',
@@ -14,8 +14,8 @@ describe('plugins:log', () => {
         sender: 'poster',
       });
     }
-    expect(mockfn).toBeCalledTimes(1);
-    expect(mockfn).toBeCalledWith('[ACTORIZE] (poster) => (actor)', 'hello world');
+    expect(mockfn).toHaveBeenCalledTimes(1);
+    expect(mockfn).toHaveBeenCalledWith('[ACTORIZE] (poster) => (actor)', 'hello world');
   });
 
   it('filter works', () => {
@@ -29,7 +29,7 @@ describe('plugins:log', () => {
         return true;
       },
     });
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     if (plugin.onMessage) {
       plugin.onMessage({
         payload: 'hello world',
@@ -37,7 +37,7 @@ describe('plugins:log', () => {
         sender: 'poster',
       });
     }
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
 
     if (plugin.onMessage) {
       plugin.onMessage({
@@ -46,7 +46,7 @@ describe('plugins:log', () => {
         sender: 'poster',
       });
     }
-    expect(mockfn).toBeCalledTimes(1);
-    expect(mockfn).toBeCalledWith('[ACTORIZE] (poster) => (worker)', 'hello world');
+    expect(mockfn).toHaveBeenCalledTimes(1);
+    expect(mockfn).toHaveBeenCalledWith('[ACTORIZE] (poster) => (worker)', 'hello world');
   });
 });

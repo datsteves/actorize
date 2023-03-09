@@ -37,20 +37,22 @@ describe('store.ts', () => {
     const store = createStore();
     const mockfn = jest.fn();
     store.subscribe('test', mockfn);
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     await store.pushMessage('test', { hello: 'world' }, 'not-existing');
     await skiploop();
-    expect(mockfn).toBeCalledTimes(1);
-    expect(mockfn).toBeCalledWith([{ payload: { hello: 'world' }, recipient: 'test', sender: 'not-existing' }]);
+    expect(mockfn).toHaveBeenCalledTimes(1);
+    expect(mockfn).toHaveBeenCalledWith([
+      { payload: { hello: 'world' }, recipient: 'test', sender: 'not-existing' },
+    ]);
   });
 
   it('should not get messages from other recipients within the subscription', async () => {
     const store = createStore();
     const mockfn = jest.fn();
     store.subscribe('nothing-here', mockfn);
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     await store.pushMessage('test', { hello: 'world' }, 'not-existing');
     await skiploop();
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
   });
 });

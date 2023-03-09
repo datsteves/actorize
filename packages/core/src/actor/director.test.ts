@@ -13,12 +13,14 @@ describe('director', () => {
     const actor2 = director.registerActor('actor-2');
     const mockfn = jest.fn();
     actor1.onMessage(mockfn);
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     // @ts-expect-error for now ok
     await actor2.sendMessage('actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
-    expect(mockfn).toBeCalledTimes(1);
-    expect(mockfn).toBeCalledWith([{ recipient: 'actor-1', payload: 'hello', sender: 'actor-2' }]);
+    expect(mockfn).toHaveBeenCalledTimes(1);
+    expect(mockfn).toHaveBeenCalledWith([
+      { recipient: 'actor-1', payload: 'hello', sender: 'actor-2' },
+    ]);
   });
 
   it('message with non local address should be blocked when no route', async () => {
@@ -32,11 +34,11 @@ describe('director', () => {
     const actor2 = director.registerActor('actor-2');
     const mockfn = jest.fn();
     actor1.onMessage(mockfn);
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
     // @ts-expect-error for now ok
     await actor2.sendMessage('otherthread.actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
-    expect(mockfn).toBeCalledTimes(0);
+    expect(mockfn).toHaveBeenCalledTimes(0);
   });
 
   it('plugin system works', async () => {
@@ -59,7 +61,11 @@ describe('director', () => {
     // @ts-expect-error for now ok
     await actor2.sendMessage('actor-1', 'hello');
     await new Promise((resolve) => setTimeout(resolve, 10));
-    expect(mockfnPlugin).toBeCalledTimes(1);
-    expect(mockfnPlugin).toBeCalledWith({ recipient: 'actor-1', payload: 'hello', sender: 'actor-2' });
+    expect(mockfnPlugin).toHaveBeenCalledTimes(1);
+    expect(mockfnPlugin).toHaveBeenCalledWith({
+      recipient: 'actor-1',
+      payload: 'hello',
+      sender: 'actor-2',
+    });
   });
 });
