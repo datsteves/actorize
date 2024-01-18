@@ -10,13 +10,14 @@ declare module './src/actor/store' {
     };
     't': 'test';
     // [key: string]: any;
+  }
 }
 
 const d = createDirector({
   store: createStore(),
 })
 
-const a = d.registerActor('')
+const a = d.registerActor('test')
 
 // a.sendMessage('')
 
