@@ -14,10 +14,11 @@ export async function dispatch<T extends RecipientAsI, K extends keyof Recipient
   let returnValue: undefined | Promise<Message<T[K]>>;
   if (waitTillResponse) {
     returnValue = new Promise((resolve) => {
-      actor.onMessage((msgs) => {
+      const unsub = actor.onMessage((msgs) => {
         // TODO: just a workaround
         const msg = msgs[0] as unknown as Message<T[K]>;
         resolve(msg);
+        unsub();
       });
     });
   }
