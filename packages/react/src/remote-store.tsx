@@ -28,7 +28,7 @@ export function useRemoteStorageField<T = unknown>(
 
   React.useEffect(() => {
     // subsribe to updates so we can update
-    store.onUpdate([fieldKey], (_, val: T) => {
+    const unsub = store.onUpdate([fieldKey], (_, val: T) => {
       setValue(val);
     });
     // get the inital state and then just set it
@@ -39,6 +39,9 @@ export function useRemoteStorageField<T = unknown>(
         // TODO: if in debug mode do console log out this error
         // just ignore it for now
       });
+    return () => {
+      unsub();
+    };
   }, [store, setValue, fieldKey]);
 
   const remoteSetValue = React.useCallback(
