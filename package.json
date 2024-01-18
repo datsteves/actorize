@@ -21,8 +21,8 @@
     "url": "https://github.com/datsteves/actorize/issues"
   },
   "homepage": "https://github.com/datsteves/actorize#readme",
-  "dependencies": {
-    "@changesets/cli": "^2.26.0",
-    "prettier": "^2.8.4"
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "prettier": "^3.2.4"
   }
 }
